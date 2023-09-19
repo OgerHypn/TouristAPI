@@ -1,5 +1,5 @@
-from datetime import datetime
-from typing import List, Optional
+from datetime import datetime, date
+from typing import List, Optional, ByteString
 
 from pydantic import BaseModel, Field
 from dataclasses import dataclass
@@ -27,14 +27,14 @@ class LevelInfo(BaseModel):
 
 
 class ImageInfo(BaseModel):
-    data: str = Field(description='Фото в Base64', example='data:image/jpg;base64,/9j/4AA..')
+    img: str = Field(description='Фото в Bytes', example='\\x8534234568...')
     title: str = Field(description='Название фото', example='Альпы')
 
 
 class BodyInfo(BaseModel):
     beauty_title: str = Field(description='Сокращенное название', example='пер. ')
-    title: str = Field(description='Название', example='Пхия')
-    other_titles: str = Field(description='Народное название', example='Триев')
+    title: str = Field(description='Название', example='Черкесия')
+    other_titles: str = Field(description='Народное название', example='Рона')
     connect: str = Field(description='Что соединяет', example='Текстовое поле')
     add_time: datetime = Field(description='Время добавления', example=datetime.utcnow().isoformat())
     user: UserInfo = Field(
@@ -81,14 +81,16 @@ class Level:
 
 @dataclass
 class Image:
-    image: str
+    img: str
     title: str
-    data_id: int
+    pereval_id: int
+    date_added: date
     id: Optional[int] = None
 
 
 @dataclass
-class Data:
+class PerevalAdded:
+    date_added: Optional[date]
     beauty_title: str
     title: str
     other_titles: str
@@ -98,5 +100,9 @@ class Data:
     coords_id: int
     level_id: int
     id: Optional[int] = None
+    user: Optional[User] = None
+    coords: Optional[Coords] = None
+    levels: Optional[Level] = None
+
 
 
