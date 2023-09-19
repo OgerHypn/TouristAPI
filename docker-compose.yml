@@ -15,7 +15,7 @@ services:
       - PASSWORD=123456
       - FSTR_DB_HOST=postgresdb
       - FSTR_DB_PORT=5432
-      - DATABASE=app_db
+      - DATABASE=public
     depends_on:
       - postgresdb
     restart: unless-stopped
