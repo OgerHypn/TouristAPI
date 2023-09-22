@@ -1,5 +1,5 @@
 from datetime import datetime, date
-from typing import List, Optional, ByteString
+from typing import List, Optional
 
 from pydantic import BaseModel, Field
 from dataclasses import dataclass
@@ -47,9 +47,36 @@ class BodyInfo(BaseModel):
             'phone': '+7 999 99 99'
         }
     )
-    coords: CoordsInfo = Field(description='пользователя', example='havet')
-    level: LevelInfo = Field(description='пользователя', example='havet')
-    images: List[ImageInfo] = Field(description='пользователя', example='havet')
+    coords: CoordsInfo = Field(
+        description='Координаты перевала',
+        example={
+            'latitude': 54.4656,
+            'longitude': 9.4577,
+            'height': 1500
+        }
+    )
+    level: LevelInfo = Field(
+        description='Уровень сложности',
+        example={
+            'winter': '1A',
+            'summer': '1А',
+            'autumn': '1А',
+            'spring': '2A',
+        }
+    )
+    images: List[ImageInfo] = Field(
+        description='Картинки',
+        example=[
+            {
+                'img': '\\x8534234568...',
+                'title': 'Седловина'
+            }
+        ]
+    )
+
+
+class PerevalInfo(BodyInfo):
+    status: bool = Field(description='Статус прохождения модерации', example=False)
 
 
 @dataclass
@@ -100,9 +127,7 @@ class PerevalAdded:
     coords_id: int
     level_id: int
     id: Optional[int] = None
-    user: Optional[User] = None
-    coords: Optional[Coords] = None
-    levels: Optional[Level] = None
+    status: Optional[bool] = False
 
 
 
