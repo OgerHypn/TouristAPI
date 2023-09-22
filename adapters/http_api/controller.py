@@ -1,15 +1,17 @@
 from fastapi import APIRouter, Response, status
 
 from domain.service import MobileTourist
+from domain.interface import Repository
 from domain.dataclasses import BodyInfo
 
 
 class Controller:
-	def __init__(self, service: MobileTourist):
+	def __init__(self, service: MobileTourist , repository: Repository):
 		self.service = service
 		self.router = APIRouter()
 		self.router.add_api_route("/", self.test, methods=["GET"])
 		self.router.add_api_route("/submitData", self.submit_data_post, methods=["POST"])
+		self.router.add_api_route("/submitData", self.submit_data_get_all, methods=["GET"])
 		self.router.add_api_route("/submitData/{pereval_id}", self.submit_data_get, methods=["GET"])
 		self.router.add_api_route("/submitData/{pereval_id}", self.submit_data_patch, methods=["PATCH"])
 	def submit_data_post(self, body: BodyInfo, response: Response):
@@ -18,7 +20,7 @@ class Controller:
 		except Exception as e:
 			response.status_code = status.HTTP_500_INTERNAL_SERVER_ERROR
 			status_now = 500
-			message = e
+			message = str(e)
 			id_ = None
 		else:
 			response.status_code = status.HTTP_201_CREATED
@@ -33,7 +35,7 @@ class Controller:
 		except Exception as e:
 			response.status_code = status.HTTP_500_INTERNAL_SERVER_ERROR
 			status_now = 500
-			message = e
+			message = str(e)
 			pereval_data = None
 		else:
 			response.status_code = status.HTTP_200_OK
@@ -44,6 +46,25 @@ class Controller:
 				"status": status_now,
 				"message": message,
 				"pereval_data": pereval_data.dict() if pereval_data is not None else None
+			}
+
+	def submit_data_get_all(self, user_email: str, response: Response):
+		try:
+			data = self.repository.get_data_by_email(user_email=user_email)
+		except Exception as e:
+			response.status_code = status.HTTP_500_INTERNAL_SERVER_ERROR
+			status_now = 500
+			message = str(e)
+			data = None
+		else:
+			response.status_code = status.HTTP_200_OK
+			status_now = 200
+			message = None
+		finally:
+			return {
+				"status": status_now,
+				"message": message,
+				"pereval_data": [elem.dict() for elem in data]
 			}
 
 	def submit_data_patch(self, body: BodyInfo, pereval_id: int, response: Response):

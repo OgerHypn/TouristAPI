@@ -64,3 +64,6 @@ class Repository(ABC):
 	@abstractmethod
 	def edit_levels(self, levels_id: int, levels: Dict[str, str]) -> None:
 		...
+	@abstractmethod
+	def get_data_by_email(self, user_email: str) -> None:
+		...
