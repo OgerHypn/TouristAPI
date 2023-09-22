@@ -3,7 +3,7 @@ import os
 from pydantic import BaseSettings
 
 
-user = os.getenv('FSTR_DB_LOGIN', 'Daniil')
+user = os.getenv('FSTR_DB_LOGIN', 'vova')
 password = os.getenv('PASSWORD', '123456')
 host = os.getenv('FSTR_DB_HOST', '127.0.0.1')
 port = os.getenv('FSTR_DB_PORT', '5432')

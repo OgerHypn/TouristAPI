@@ -29,6 +29,7 @@ class Repository(ABC):
 	@abstractmethod
 	def get_user_by_phone(self, user_phone: str) -> Optional[dataclasses.User]:
 		...
+
 	@abstractmethod
 	def get_pereval(self, pereval_id: int) -> Optional[dataclasses.PerevalAdded]:
 		...
@@ -64,6 +65,7 @@ class Repository(ABC):
 	@abstractmethod
 	def edit_levels(self, levels_id: int, levels: Dict[str, str]) -> None:
 		...
+
 	@abstractmethod
 	def get_data_by_email(self, user_email: str) -> None:
 		...

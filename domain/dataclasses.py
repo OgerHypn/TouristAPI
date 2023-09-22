@@ -6,29 +6,30 @@ from dataclasses import dataclass
 
 
 class UserInfo(BaseModel):
-    email: Optional[str] = Field(default=None, description='Эл. почта пользователя', example='ggrtyy@mail.ru')
-    fam: str = Field(description='Фамилия пользователя', example='Иванов')
-    name: str = Field(description='Имя пользователя', example='Иван')
+    email: Optional[str] = Field(default=None, description='Эл. почта пользователя', example='qwerty@mail.ru')
+    fam: str = Field(description='Фамилия пользователя', example='Пупкин')
+    name: str = Field(description='Имя пользователя', example='Василий')
     otc: Optional[str] = Field(default=None, description='Отчество пользователя', example='Иванович')
-    phone: str = Field(description='Телефон пользователя', example='+7 999 99 99')
+    phone: str = Field(description='Телефон пользователя', example='+7 555 55 55')
 
 
 class CoordsInfo(BaseModel):
-    latitude: float = Field(description='Широта', example=54.4656)
-    longitude: float = Field(description='пользователя', example=9.4577)
-    height: int = Field(description='пользователя', example=1500)
+    latitude: float = Field(description='Широта', example=45.3842)
+    longitude: float = Field(description='пользователя', example=7.1525)
+    height: int = Field(description='пользователя', example=1200)
 
 
 class LevelInfo(BaseModel):
     winter: str = Field(description='Категория трудности. Зима.', example='')
-    summer: str = Field(description='Категория трудности. Лето.', example='A1')
-    autumn: str = Field(description='Категория трудности. Осень', example='')
+    summer: str = Field(description='Категория трудности. Лето.', example='1А')
+    autumn: str = Field(description='Категория трудности. Осень', example='1А')
     spring: str = Field(description='Категория трудности. Весна.', example='')
 
 
 class ImageInfo(BaseModel):
     img: str = Field(description='Фото в Bytes', example='\\x8534234568...')
-    title: str = Field(description='Название фото', example='Альпы')
+    title: str = Field(description='Название фото', example='Седловина')
+
 
 class PerevalInfoResponse(BaseModel):
     id: str = Field(description='ID перевала в бд', example=1)
@@ -40,18 +41,18 @@ class PerevalInfoResponse(BaseModel):
     coords: CoordsInfo = Field(
         description='Координаты перевала',
         example={
-            'latitude': 54.4656,
-            'longitude': 9.4577,
-            'height': 1500
+            'latitude': 45.3842,
+            'longitude': 7.1525,
+            'height': 1200
         }
     )
     level: LevelInfo = Field(
         description='Уровень сложности',
         example={
-            'winter': '1A',
+            'winter': '2B',
             'summer': '1А',
             'autumn': '1А',
-            'spring': '2A',
+            'spring': '2B',
         }
     )
     images: List[ImageInfo] = Field(
@@ -64,37 +65,39 @@ class PerevalInfoResponse(BaseModel):
         ]
     )
     status: bool = Field(description='Статус прохождения модерации', example=False)
+
+
 class BodyInfo(BaseModel):
     beauty_title: str = Field(description='Сокращенное название', example='пер. ')
-    title: str = Field(description='Название', example='Черкесия')
-    other_titles: str = Field(description='Народное название', example='Рона')
+    title: str = Field(description='Название', example='Пхия')
+    other_titles: str = Field(description='Народное название', example='Триев')
     connect: str = Field(description='Что соединяет', example='Текстовое поле')
     add_time: datetime = Field(description='Время добавления', example=datetime.utcnow().isoformat())
     user: UserInfo = Field(
         description='Пользователь',
         example={
-            'email': 'ggrtyy@mail.ru',
-            'fam': 'Иванов',
-            'name': 'Иван',
+            'email': 'qwerty@mail.ru',
+            'fam': 'Пупкин',
+            'name': 'Василий',
             'otc': 'Иванович',
-            'phone': '+7 999 99 99'
+            'phone': '+7 555 55 55'
         }
     )
     coords: CoordsInfo = Field(
         description='Координаты перевала',
         example={
-            'latitude': 54.4656,
-            'longitude': 9.4577,
-            'height': 1500
+            'latitude': 45.3842,
+            'longitude': 7.1525,
+            'height': 1200
         }
     )
     level: LevelInfo = Field(
         description='Уровень сложности',
         example={
-            'winter': '1A',
+            'winter': '2B',
             'summer': '1А',
             'autumn': '1А',
-            'spring': '2A',
+            'spring': '2B',
         }
     )
     images: List[ImageInfo] = Field(
@@ -161,6 +164,3 @@ class PerevalAdded:
     level_id: int
     id: Optional[int] = None
     status: Optional[bool] = False
-
-
-

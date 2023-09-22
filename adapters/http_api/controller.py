@@ -6,14 +6,16 @@ from domain.dataclasses import BodyInfo
 
 
 class Controller:
-	def __init__(self, service: MobileTourist , repository: Repository):
+	def __init__(self, service: MobileTourist, repository: Repository):
 		self.service = service
+		self.repository = repository
 		self.router = APIRouter()
 		self.router.add_api_route("/", self.test, methods=["GET"])
 		self.router.add_api_route("/submitData", self.submit_data_post, methods=["POST"])
 		self.router.add_api_route("/submitData", self.submit_data_get_all, methods=["GET"])
 		self.router.add_api_route("/submitData/{pereval_id}", self.submit_data_get, methods=["GET"])
 		self.router.add_api_route("/submitData/{pereval_id}", self.submit_data_patch, methods=["PATCH"])
+
 	def submit_data_post(self, body: BodyInfo, response: Response):
 		try:
 			id_ = self.service.add_data(body=body)
@@ -88,5 +90,6 @@ class Controller:
 				"message": message,
 				"state": state
 			}
+
 	def test(self):
 		return {'test': 'success'}

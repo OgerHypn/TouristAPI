@@ -1,2 +1,2 @@
 from .settings import Settings
-from .repository import maper
+from .repository import mapper

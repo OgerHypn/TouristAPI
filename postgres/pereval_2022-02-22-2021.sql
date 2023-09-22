@@ -1,6 +1,6 @@
 -- -------------------------------------------------------------
 -- Database: pereval
--- Generation Time: 2023-09-16 15:34:15.6733
+-- Generation Time: 2022-02-22 14:19:15.6730
 -- -------------------------------------------------------------
 
 
@@ -57,30 +57,29 @@ CREATE TABLE "public"."spr_activities_types" (
 );
 
 INSERT INTO "public"."pereval_added" ("id", "date_added", "raw_data", "images") VALUES
-(1, '2023-09-16 15:34:15.6733', '{
-	"beauty_title": "пер. ",
-	"title": "Черкесия",
-	"other_titles": "Рона",
-	"connect": "test",
-    "add_time": "2023-09-05 15:18:16",
-    "user": {"email": "qwerty@mail.ru",
-    "fam": "Иванов",
-    "name": "Иван",
-    "otc": "Иванович",
-    "phone": "+7 999 99 99"},
-
+(1, '2022-02-21 14:14:00.720184', '{
+	"beautyTitle": "пер. ",
+	"title": "Пхия",
+	"other_titles": "Триев",
+	"connect": "",
+	"add_time": "2021-09-22 13:18:13",
+	"user": {
+		"email": "user@email.tld",
+		"phone": "79031234567",
+		"fam": "Пупкин",
+		"name": "Василий",
+		"otc": "Иванович"
 	},
-	"coords":{ "latitude": "54.4656",
-	"longitude": "9.4577",
-	"height": "1500"},
-
-
-	"level": {"winter": "1A",
-	"summer": "1А",
-	"autumn": "1А",
-	"spring": "2A"},
-
-
+	"coords": {
+		"latitude": "45.3842",
+		"longitude": "7.1525",
+		"height": "1200"
+	},
+	"level": {
+		"winter": "",
+		"summer": "1А",
+		"autumn": "1А",
+		"spring": ""
 	}
 }', '{"images": 
         [{"id": 1, "title":"Седловина"}, 
